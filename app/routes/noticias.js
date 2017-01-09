@@ -1,22 +1,13 @@
-var client = require('../../config/dbConnection')
-
 module.exports = function(app){
   app.get('/noticias', function(req, res){
+    var conn = app.config.dbConnection();
+    var noticiaModel = app.app.models.noticiaModel;
 
-    var results = [];
-
-    client.connect();
-    var query = client.query('SELECT * FROM tbl_noticias');
-
-    query.on('row', (row)=>{
-      results.push(row);
+    noticiaModel.getNoticias(conn, function(err, result){
+      if(err)
+        console.log(err);
+      else
+        res.render('noticias/noticias', {noticias: result});
     });
-
-    query.on('end', ()=>{
-      console.log(results);
-      res.render('noticias/noticias', {noticias: results});
-      client.end();
-    });
-
   });
 };
