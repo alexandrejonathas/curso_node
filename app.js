@@ -1,16 +1,10 @@
-var express = require('express');
-var app = express();
+var app = require('./config/server');
 
-app.set('view engine', 'ejs');
+var rotaHome = require('./app/routes/home');
+rotaHome(app);
 
-app.get('/', function(req, res){
-  res.render('home/index');
-});
-
-app.get('/noticias', function(req, res){
-  res.render('noticias/noticias');
-});
-
+var rotaNoticias = require('./app/routes/noticias');
+rotaNoticias(app);
 
 app.listen(3000, function(){
   console.log('Servidor rodando com Express');
