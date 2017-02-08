@@ -1,9 +1,9 @@
-module.exports = function(app){
-  app.get('/noticias', function(req, res){
-    var conn = app.config.dbConnection();
-    var noticiaModel = app.app.models.noticiaModel;
+module.exports = function(application){
+  application.get('/noticias', function(req, res){
+    var conn = application.config.dbConnection();
+    var noticiaModel = new application.app.models.NoticiaDAO(conn);
 
-    noticiaModel.getNoticias(conn, function(err, result){
+    noticiaModel.getNoticias(function(err, result){
       if(err)
         console.log(err);
       else

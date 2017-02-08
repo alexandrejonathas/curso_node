@@ -1,10 +1,10 @@
-module.exports = function(app){
-  app.get('/noticia', function(req, res){
+module.exports = function(application){
+  application.get('/noticia', function(req, res){
 
-    var conn = app.config.dbConnection();
-    var noticiaModel = app.app.models.noticiaModel;
+    var conn = application.config.dbConnection();
+    var noticiaModel = new application.app.models.NoticiaDAO(conn);
 
-    noticiaModel.getNoticia(conn, function(err, result){
+    noticiaModel.getNoticia(function(err, result){
       res.render('noticias/noticia', {noticia: result});
     })
 
