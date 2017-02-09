@@ -1,40 +1,98 @@
-<!DOCTYPE html>
-	<html lang="pt-br">
-		<head>
-			<meta charset="utf-8"/>
-			<title>Formulário de Cadastro de Noticia</title>
-		</head>
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+
+		<title>Portal de notícias</title>
+
+		<!-- JQuery -->
+		<script src="js/jquery-2.2.1.js"></script>
+
+		<!-- bootstrap - link cdn -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- incluindo css -->
+		<link href="css/style.css" rel="stylesheet">
+
+		<!-- favicon -->
+		<link rel="shortcut icon" href="images/favicon.ico" />
+	</head>
+
 	<body>
-    <h1>Adicionar notícia</h1>
-    <br />
 
-		<% if (errors) { %>
-			<ul>
-				<% for (var i = 0; i < errors.length; i++) { %>
-					<li><%= errors[i].msg %></li>
-				<% } %>
-			</ul>
-			<br />
-		<% } %>
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+
+					<img src="images/logo.png" />
+				</div>
+
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/">HOME</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 
 
-    <form action="/noticias/salvar" method="post">
-      <label>Título</label>
-      <input type="text" name="titulo" id="titulo" value="<%= noticia.titulo %>" placeholder="Titulo da notícia">
-      <br />
-			<label>Resumo</label>
-      <input type="text" name="resumo" id="resumo" value="<%= noticia.resumo %>" placeholder="Um resumo da notícia">
-      <br />
-			<label>Autor</label>
-      <input type="text" name="autor" id="autor" value="<%= noticia.autor %>" placeholder="Nome do autor">
-      <br />
-			<label>Data dos fatos</label>
-      <input type="date" name="data_noticia" id="data_noticia" value="<%= noticia.data_noticia %>" placeholder="Data da notícia">
-      <br />
-      <label>Noticia</label>
-      <textarea name="noticia" id="noticia" rows="5" cols="30"><%= noticia.noticia %></textarea>
-      <br />
-      <input type="submit" value="Adicionar">
-    </form>
-  </body>
-  </html>
+	    <div class="container">
+				<% if(errors.length > 0){ %>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="alert alert-danger">
+								<strong>Atenção!</strong>
+								<ul>
+									<%for(var i = 0; i < errors.length; i++){%>
+										<li><%=errors[i].msg%></li>
+									<%}%>
+								</ul>
+							</div>
+						</div>
+					</div>
+				<%}%>
+	    	<div class="row">
+	    		<div class="col-md-12">
+	    			<form action="/noticias/salvar" method="post">
+						<div class="form-group">
+							<label for="titulo">Título:</label>
+							<input value="<%=noticia.titulo%>" type="text" class="form-control" id="titulo" name="titulo">
+						</div>
+
+						<div class="form-group">
+							<label for="pwd">Resumo:</label>
+							<input value="<%=noticia.resumo%>" type="text" class="form-control" id="resumo" name="resumo">
+						</div>
+
+						<div class="form-group">
+							<label for="pwd">Autor:</label>
+							<input value="<%=noticia.autor%>" type="text" class="form-control" id="autor" name="autor">
+						</div>
+
+						<div class="form-group">
+							<label for="pwd">Data:</label>
+							<input value="<%=noticia.data_noticia%>" type="date" class="form-control" id="data_noticia" name="data_noticia">
+						</div>
+
+						<div class="form-group">
+							<label for="pwd">Notícia:</label>
+							<textarea class="form-control" id="noticia" name="noticia"><%=noticia.noticia%></textarea>
+						</div>
+
+
+						<button type="submit" class="btn btn-default">Cadastrar</button>
+						</form>
+		    	</div>
+	    	</div>
+	    </div>
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	</body>
+</html>

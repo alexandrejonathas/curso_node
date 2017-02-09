@@ -1,24 +1,9 @@
 module.exports = function(application){
   application.get('/noticias', function(req, res){
-    var conn = application.config.dbConnection();
-    var noticiaModel = new application.app.models.NoticiaDAO(conn);
-
-    noticiaModel.getNoticias(function(err, result){
-      if(err)
-        console.log(err);
-      else
-        res.render('noticias/noticias', {noticias: result});
-    });
+    application.app.controllers.noticia.noticias(application, req, res);
   });
-  
+
   application.get('/noticia', function(req, res){
-
-    var conn = application.config.dbConnection();
-    var noticiaModel = new application.app.models.NoticiaDAO(conn);
-
-    noticiaModel.getNoticia(function(err, result){
-      res.render('noticias/noticia', {noticia: result});
-    })
-
+    application.app.controllers.noticia.noticia(application, req, res);
   });
 };
